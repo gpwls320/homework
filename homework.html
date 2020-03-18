@@ -15,6 +15,8 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
     <title>메인페이지</title>
+
+
 </head>
 
 <body>
@@ -54,7 +56,6 @@
                 <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">주문자명</span>
                 </div>
-                <input type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
             </div>
 
             <div class="input-group mb-3">
@@ -83,9 +84,20 @@
                 <textarea class="form-control" aria-label="배송 메세지"></textarea>
             </div>
             <br>
-            <button class="btn btn-primary" type="submit">구매하기</button>
+            <button class="btn btn-primary" onclick="productBuy()">구매하기</button>
         </div>
     </form>
+    <script>
+        function productBuy() {
+            //e.preventDefault();
+            let oName = $('#orderName').val();
+            console.log(oName);
+            if (oName === "") {
+                alert('주문자명을 입력하세요.');
+            }
+        }
+    </script>
+
 </body>
 
 </html>
