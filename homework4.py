@@ -10,7 +10,7 @@ db=client.dbsparta
 def home():
     return render_template('homework4.html')
 
-@app.route('/order', method=["POST"])
+@app.route('/order', methods=["POST"])
 def post_order():
     orderName = request.form['orderName']
     quantity= request.form['quantity']
@@ -20,7 +20,7 @@ def post_order():
     orderMessage=request.form['orderMessage']
 
     # order
-    new_rorder = {
+    new_order = {
         "orderName": orderName,
         "quantity": quantity,
         "totalPrice": totalPrice,

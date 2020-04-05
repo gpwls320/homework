@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="homework.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
@@ -147,13 +146,14 @@
                         orderList=response['orderlist']
                         for(i=0; i<orderList.length; i++){
                             let read_order=orderList[i];
+                            console.log(orderList[i])
                             make_orderList({
                                 orderName: orderList[i].orderName,
                                 quantity: orderList[i].quantity,
                                 totalPrice: orderList[i].totalPrice,
                                 address: orderList[i].address,
                                 email: orderList[i].email,
-                                orderMassage: orderList[i].orderMassage
+                                orderMessage: orderList[i].orderMessage
                             })
                         }
                     }
@@ -161,14 +161,14 @@
             })
         }
 
-        function make_orderList(){
+        function make_orderList(orderList){
             let temp_html='<tr>\
-                                <td>'+ orderName + '</td>\
-                                <td>'+ quantity + '</td>\
-                                <td>'+ totalPrice + '</td>\
-                                <td>'+ address + '</td>\
-                                <td>'+ email + '</td>\
-                                <td>'+ orderMassage + '</td>\
+                                <td>'+ orderList.orderName + '</td>\
+                                <td>'+ orderList.quantity + '</td>\
+                                <td>'+ orderList.totalPrice + '</td>\
+                                <td>'+ orderList.address + '</td>\
+                                <td>'+ orderList.email + '</td>\
+                                <td>'+ orderList.orderMessage + '</td>\
                             </tr>';
             $('#orders-box').append(temp_html);
         }
@@ -179,9 +179,9 @@
             let oAddress = $("#orderAdress").val();
             let oEmail = $("#orderEmail").val();
             let startIndex = oEmail.indexOf('@');
-            let quantity = ("#inputGroupSelect01").val();
-            let orderMessage=("#orderMessage").val();
-            let price=("#productPrice").val();
+            let quantity = $("#inputGroupSelect01").val();
+            let orderMessage=$("#orderMessage").val();
+            let price=$("#productPrice").val();
 
             if (oName === "") {
                 alert('주문자명을 입력하세요.');
@@ -204,6 +204,7 @@
 
                 return false;
             } else {
+
                 $.ajax({
                     type: "POST",
                     data: {
@@ -214,6 +215,7 @@
                         "address": oAddress,
                         "orderMessage": orderMessage
                     },
+                    url: '/order',
                     success: function(response){
                         if(response['result']=='success'){
                             alert(response['msg'])
